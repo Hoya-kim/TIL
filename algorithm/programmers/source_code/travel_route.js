@@ -1,4 +1,4 @@
-// 프로그래머스 - 여행경로
+// First solution
 function solution(tickets) {
   let answer = [];
   const routes = {};
@@ -28,6 +28,50 @@ function solution(tickets) {
   return answer[0];
 }
 
+// Refactored solution
+function solution(tickets) {
+  const answer = []; // 정답 리스트
+  const routes = {}; // 시작점을 key로 하는 배열들을 저장할 객체
+  const check = {}; // 방문 확인
+  const tmp = ['ICN'];
+  tickets.forEach(([start, end]) => {
+    // 객체 초기화
+    if (!routes[start]) {
+      routes[start] = [];
+      check[start] = [];
+    }
+    routes[start].push(end);
+    check[start].push(0);
+  });
+
+  Object.keys(routes).forEach(key => {
+    // 정렬 후 DFS -> 첫 번째 경로가 정답
+    routes[key].sort();
+  });
+
+  const DFS = (n, cur) => {
+    if (answer.length) return; // cut edge
+    if (n === tickets.length + 1) {
+      answer.push(tmp.slice());
+      return;
+    }
+    if (routes[cur]) {
+      for (let i = 0; i < routes[cur].length; i++) {
+        if (check[cur][i] === 0) {
+          check[cur][i] = 1;
+          tmp.push(routes[cur][i]);
+          DFS(n + 1, routes[cur][i]);
+          check[cur][i] = 0;
+          tmp.pop();
+        }
+      }
+    }
+  };
+  DFS(1, 'ICN');
+  return answer[0];
+}
+
+// Test Cases
 console.log(
   solution([
     ['ICN', 'JFK'],
@@ -44,3 +88,26 @@ console.log(
     ['ATL', 'SFO'],
   ])
 ); // ["ICN", "ATL", "ICN", "SFO", "ATL", "SFO"]
+
+// Additoinal cases
+console.log(
+  solution([
+    ['ICN', 'SFO'],
+    ['SFO', 'ICN'],
+    ['ICN', 'SFO'],
+    ['SFO', 'QRE'],
+  ])
+); // [ 'ICN', 'SFO', 'ICN', 'SFO', 'QRE' ]
+
+console.log(
+  solution([
+    ['ICN', 'BOO'],
+    ['ICN', 'COO'],
+    ['COO', 'DOO'],
+    ['DOO', 'COO'],
+    ['BOO', 'DOO'],
+    ['DOO', 'BOO'],
+    ['BOO', 'ICN'],
+    ['COO', 'BOO'],
+  ])
+); // [ 'ICN', 'BOO', 'DOO', 'BOO', 'ICN', 'COO', 'DOO', 'COO', 'BOO' ]
