@@ -4,8 +4,8 @@ const todos = [
   { id: 1, content: 'Javascript', completed: false },
 ];
 
-const render = todos => {
-  return todos.reduce((acc, cur) => {
+const render = todos =>
+  todos.reduce((acc, cur) => {
     return (
       acc +
       `<li id=${cur.id}>\n  <label><input type="checkbox"${cur.completed ? ' checked' : ''}>${
@@ -13,6 +13,5 @@ const render = todos => {
       }</input></label>\n</li>\n`
     );
   }, '');
-};
 
 console.log(render(todos));
