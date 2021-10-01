@@ -12,7 +12,7 @@ const render = todos => {
         cur.content
       }</input></label>\n</li>\n`
     );
-  }, ``);
+  }, '');
 };
 
 console.log(render(todos));

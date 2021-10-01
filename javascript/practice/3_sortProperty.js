@@ -4,10 +4,8 @@ let todos = [
   { id: 1, content: 'Javascript', completed: false },
 ];
 
-const sortBy = (todos, key) => {
-  return todos.sort((a, b) => (a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0));
-};
-
+const sortBy = (todos, key) =>
+  todos.sort((a, b) => (a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0));
 todos = sortBy(todos, 'id');
 console.log(todos);
 /*
