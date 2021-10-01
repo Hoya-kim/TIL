@@ -6,4 +6,7 @@ const todos = [
 
 const countCompletedTodos = todos => todos.reduce((acc, cur) => acc + (cur.completed ? 1 : 0), 0);
 
+// Best
+const countCompletedTodos2 = todos => todos.filter(todo => todo.completed).length;
+
 console.log(countCompletedTodos(todos)); // 1

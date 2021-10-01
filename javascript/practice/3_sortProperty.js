@@ -4,8 +4,18 @@ let todos = [
   { id: 1, content: 'Javascript', completed: false },
 ];
 
+// mutating!, 매개변수 이름의 의미가 없음!
 const sortBy = (todos, key) =>
   todos.sort((a, b) => (a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0));
+
+// Best
+// spread를 이용한 복사, 매개변수 의미있는 부여
+// 가급적 순수함수로 만들기, accessor
+const sortBy2 = (todos, key) =>
+  [...todos].sort((todo1, todo2) =>
+    todo1[key] > todo2[key] ? 1 : todo1[key] < todo2[key] ? -1 : 0
+  );
+
 todos = sortBy(todos, 'id');
 console.log(todos);
 /*

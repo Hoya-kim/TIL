@@ -10,6 +10,10 @@ const toggleCompletedById = (todos, id) =>
     return todo;
   });
 
+// Best
+const toggleCompletedById2 = (todos, id) =>
+  todos.map(todo => (todo.id === id ? { ...todo, completed: !todo.completed } : todo));
+
 todos = toggleCompletedById(todos, 2);
 console.log(todos);
 /*

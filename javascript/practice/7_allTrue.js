@@ -10,6 +10,9 @@ const toggleCompletedAll = todos =>
     return todo;
   });
 
+// Best
+const toggleCompletedAll2 = todos => todos.map(todo => ({ ...todo, completed: true }));
+
 todos = toggleCompletedAll(todos);
 console.log(todos);
 /*
