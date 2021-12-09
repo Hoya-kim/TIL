@@ -75,7 +75,6 @@ var findTheCity = function (n, edges, distanceThreshold) {
     }
   }
 
-  console.log(dist);
   let min = 1000;
   const map = new Map();
   for (let i = 0; i < dist.length; i++) {
@@ -87,7 +86,6 @@ var findTheCity = function (n, edges, distanceThreshold) {
     }
     min = Math.min(min, map.get(i).length);
   }
-  console.log(map);
 
   return [...map]
     .filter((el) => el[1].length === min)
